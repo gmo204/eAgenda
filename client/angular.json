@@ -54,6 +54,7 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/magenta-violet.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -113,6 +114,7 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/magenta-violet.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -120,5 +122,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "b40a2c09-92da-4f3f-97a2-c8cd6240799b"
   }
 }
