@@ -1,7 +1,12 @@
-export interface RegistrarUsuarioViewModel{
+export interface RegistrarUsuarioViewModel {
   nome: string;
   login: string;
   email: string;
+  senha: string;
+}
+
+export interface AutenticarUsuarioViewModel {
+  login: string;
   senha: string;
 }
 
@@ -16,4 +21,4 @@ export interface UsuarioTokenViewModel {
   id: string;
   nome: string;
   email: string;
-  }
+}
