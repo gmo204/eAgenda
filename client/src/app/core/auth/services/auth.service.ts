@@ -24,8 +24,10 @@ export class AuthService {
       const urlCompleto = `${this.apiUrl}/contas/autenticar`;
 
       return this.http
-        .post<TokenViewModel>(urlCompleto, loginUsuario)
-        .pipe(map(this.processarDados));
+        .post<TokenViewModel>(urlCompleto, loginUsuario).pipe(
+        map(this.processarDados),
+        catchError(this.processarErro)
+      );
     }
 
     public logout() {
@@ -35,13 +37,17 @@ export class AuthService {
     }
 
     public validarExpiracaoToken(dataExpiracaoToken: Date): boolean {
-      return dataExpiracaoToken > new Date(); 
+      return dataExpiracaoToken > new Date();
     }
 
     private processarDados(resposta: any): TokenViewModel {
       if (resposta.sucesso) return resposta.dados;
 
       throw new Error('Erro ao mapear token do usuário.');
+    }
+
+    private processarErro(erro: any){
+      return throwError(() => new Error(erro.error.erros[0]));
     }
 
 }

@@ -18,6 +18,7 @@ TokenViewModel,
 import { AuthService } from '../../services/auth.service';
 import { UsuarioService } from '../../services/usuario.service';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { NotificacaoService } from '../../../notificacao/notiicacao.service';
 @Component({
 selector: 'app-login',
 standalone: true,
@@ -41,7 +42,8 @@ export class LoginComponent {
     private router: Router,
     private authService: AuthService,
     private usuarioService: UsuarioService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private notificacao: NotificacaoService,
   ) {
     this.form = this.fb.group({
       login: [
@@ -78,11 +80,25 @@ export class LoginComponent {
 
   const loginUsuario: AutenticarUsuarioViewModel = this.form.value;
 
-    this.authService.login(loginUsuario).subscribe((res) => {
+    const observer = {
+      next: (res: TokenViewModel) => this.processarSucesso(res),
+      error: (erro: Error) => this.processarFalha(erro)
+    }
+
+    this.authService
+    .login(loginUsuario)
+    .subscribe(observer);
+  }
+
+  private processarSucesso(res: TokenViewModel) {
       this.usuarioService.logarUsuario(res.usuario);
       this.localStorageService.salvarTokenAutenticacao(res);
 
       this.router.navigate(['/dashboard']);
-    });
+  }
+
+  private processarFalha(erro: Error) {
+    this.notificacao.erro(erro.message);
+    console.log(erro);
   }
 }
