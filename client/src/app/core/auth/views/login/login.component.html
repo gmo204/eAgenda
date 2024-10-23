@@ -10,6 +10,7 @@
           <mat-label>Nome de Usuário</mat-label>
           <input
             matInput
+            data-cy="login"
             formControlName="login"
             autocomplete="username"
             placeholder="Ex: JoaoSilva12"
@@ -33,6 +34,7 @@
           <mat-label>Senha</mat-label>
           <input
             matInput
+            data-cy="senha"
             formControlName="senha"
             type="password"
             autocomplete="current-password"
@@ -54,7 +56,7 @@
         </mat-form-field>
 
         <div class="row justify-content-end g-2 gap-2 mt-5">
-          <button type="submit" mat-flat-button class="col-sm-4">
+          <button type="submit" data-cy="submit" mat-flat-button class="col-sm-4">
             <mat-icon matIconPrefix>login</mat-icon>
             Login
           </button>

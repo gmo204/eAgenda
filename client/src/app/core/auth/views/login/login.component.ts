@@ -75,6 +75,8 @@ export class LoginComponent {
 
   public entrar() {
     if (this.form.invalid) {
+      this.notificacao.aviso('Preencha os campos corretamente');
+
       return;
   }
 
