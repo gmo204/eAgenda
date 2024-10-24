@@ -1,17 +1,18 @@
 import { NgIf, NgForOf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NotificacaoService } from '../../../core/notificacao/notiicacao.service';
+import { ContatoEditadoViewModel, ContatoInseridoViewModel } from '../models/contato.models';
 import { ContatoService } from '../services/contato.service';
-import { ContatoInseridoViewModel } from '../models/contato.models';
+import { PartialObserver } from 'rxjs';
 
 @Component({
-  selector: 'app-cadastro-contato',
+  selector: 'app-edicao-contato',
   standalone: true,
   imports: [
     NgIf,
@@ -22,14 +23,14 @@ import { ContatoInseridoViewModel } from '../models/contato.models';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-  ],
-  templateUrl: './cadastro-contato.component.html',
+    ],
+  templateUrl: './edicao-contato.component.html',
 })
-
-export class CadastroContatoComponent {
+export class EdicaoContatoComponent implements OnInit{
   public form: FormGroup;
 
   constructor(
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
     private contatoService: ContatoService,
@@ -64,6 +65,12 @@ export class CadastroContatoComponent {
       });
     }
 
+  ngOnInit(): void {
+    const contato = this.route.snapshot.data['contato']
+
+    this.form.patchValue(contato);
+  }
+
   get nome() {
     return this.form.get('nome')
   }
@@ -93,18 +100,19 @@ export class CadastroContatoComponent {
       return;
     }
 
-    const inserirContatoVm = this.form.value;
+    const id = this.route.snapshot.params['id'];
+    const editarContatoVm = this.form.value;
 
-    this.contatoService.inserir(inserirContatoVm).subscribe({
+    const observer: PartialObserver<ContatoEditadoViewModel> = {
       next: (contatoInserido) => this.processarSucesso(contatoInserido),
-      error: (erro) => this.processarFalha(erro)
-    });
+      error: (erro) => this.processarFalha(erro),
+    };
 
-    this.contatoService.inserir(inserirContatoVm).subscribe();
+    this.contatoService.editar(id ,editarContatoVm).subscribe(observer);
   }
 
-  private processarSucesso(contato: ContatoInseridoViewModel): void {
-    this.notificacaoService.sucesso(`Contato ${contato.nome} cadastrado com sucesso`)
+  private processarSucesso(contato: ContatoEditadoViewModel): void {
+    this.notificacaoService.sucesso(`Contato ${contato.nome} editado com sucesso`)
 
     this.router.navigate(['/contatos', 'listar'])
   }
