@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { CompromissoEditadoViewModel, CompromissoInseridoViewModel, EditarCompromissoViewModel, InserirCompromissoViewModel, ListarCompromissosViewModel, VisualizarCompromissoViewModel } from '../models/compromisso-models';
+import { CompromissoEditadoViewModel, CompromissoExcluidoViewModel, CompromissoInseridoViewModel, EditarCompromissoViewModel, InserirCompromissoViewModel, ListarCompromissosViewModel, VisualizarCompromissoViewModel } from '../models/compromisso-models';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +31,14 @@ export class CompromissoService {
     return this.http
     .put<CompromissoEditadoViewModel>(urlCompleto, registro)
     .pipe(map(this.processarDados), catchError(this.processarFalha))
+  }
+
+  public excluir(id: string): Observable<CompromissoExcluidoViewModel>{
+    const urlCompleto = `${this.url}/${id}`;
+
+    return this.http
+    .delete<CompromissoExcluidoViewModel>(urlCompleto)
+    .pipe(map(this.processarDados), catchError(this.processarFalha));
   }
 
 
