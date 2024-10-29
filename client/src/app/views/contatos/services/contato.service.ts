@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { LocalStorageService } from '../../../core/auth/services/local-storage.service';
-import { ContatoEditadoViewModel, ContatoInseridoViewModel, EditarContatoViewModel, InserirContatoViewModel, ListarContatoViewModel, VisualizarContatoViewModel } from '../models/contato.models';
+import { ContatoEditadoViewModel,
+   ContatoInseridoViewModel,
+   EditarContatoViewModel,
+   InserirContatoViewModel,
+   ListarContatoViewModel, 
+   VisualizarContatoViewModel } from '../models/contato.models';
 import { catchError, map, Observable, throwError } from 'rxjs';
 
 @Injectable({
@@ -13,7 +17,6 @@ export class ContatoService {
 
   constructor(
     private http: HttpClient,
-     private localStorage: LocalStorageService
     ) { }
 
   public inserir(
@@ -64,6 +67,6 @@ export class ContatoService {
   }
 
   private processarFalha(erro: any) {
-    return throwError(() => new Error(erro.error.erroos[0]));
+    return throwError(() => new Error(erro.error.erros[0]));
   }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -58,6 +58,11 @@ export class ShellComponent {
       titulo: 'Contatos',
       icone: 'people',
       rota: '/contatos',
+    },
+    {
+      titulo: 'Compromissos',
+      icone: 'event',
+      rota: '/compromissos',
     },
     ];
 

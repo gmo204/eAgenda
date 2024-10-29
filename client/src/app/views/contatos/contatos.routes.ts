@@ -43,5 +43,4 @@ export const contatosRoutes: Routes = [
       contato: visualizarContatosResolver
     }
   }
-
 ]
