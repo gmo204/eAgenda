@@ -7,6 +7,7 @@ import { inject } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { contatosRoutes } from './views/contatos/contatos.routes';
 import { compromissosRoutes } from './views/compromissos/compromissos.routes';
+import { tarefasRoutes } from './views/tarefas/tarefas.routes';
 
 const authGuard: CanMatchFn = (): Observable<boolean | UrlTree> => {
   const router = inject(Router);
@@ -43,5 +44,5 @@ export const routes: Routes = [
 
   {path: 'contatos', children: contatosRoutes},
 
-  {path: 'compromissos', children: compromissosRoutes}
+  {path: 'tarefas', children: tarefasRoutes}
 ];

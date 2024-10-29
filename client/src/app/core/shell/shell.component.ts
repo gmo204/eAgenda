@@ -64,6 +64,11 @@ export class ShellComponent {
       icone: 'event',
       rota: '/compromissos',
     },
+    {
+      titulo: 'Tarefas',
+      icone: 'task_alt',
+      rota: '/tarefas',
+    },
     ];
 
       isHandset$: Observable<boolean>;
