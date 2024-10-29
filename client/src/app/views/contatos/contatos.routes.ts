@@ -7,7 +7,7 @@ import { CadastroContatoComponent } from "./cadastrar/cadastro-contato.component
 import { EdicaoContatoComponent } from "./editar/edicao-contato.component";
 import { ExclusaoContatoComponent } from "./excluir/exclusao-contato.component";
 
-const listagemContatosResolver: ResolveFn<ListarContatoViewModel[]> = () => {
+export const listagemContatosResolver: ResolveFn<ListarContatoViewModel[]> = () => {
   return inject(ContatoService).selecionarTodos();
 }
 
@@ -29,6 +29,7 @@ export const contatosRoutes: Routes = [
   },
 
   {path: 'cadastrar', component: CadastroContatoComponent},
+
   {
     path: 'editar/:id',
     component: EdicaoContatoComponent,

@@ -18,14 +18,14 @@
     >
 
     <mat-card-header>
-      <mat-card-title> {{teste.assunto}} </mat-card-title>
+      <mat-card-title> {{item.assunto}} </mat-card-title>
     <mat-card-header>
 
-
     <mat-card-content class="d-grid mt-4">
-      <span><strong>Telefone:</strong> 98 </span>
+      <span><strong>Data:</strong> {{ item.data }}</span>
+      <span><strong>Hora de Início:</strong> {{ item.horaInicio }}</span>
+      <span><strong>Hora de Término:</strong> {{ item.horaTermino }}</span>
     </mat-card-content>
-
 
     <mat-card-footer class="d-flex justify-content-end gap-1 p-3 mt-auto">
       <a
@@ -46,7 +46,3 @@
         <mat-icon>delete</mat-icon>
       </a>
     </mat-card-footer>
-
-
-
-
