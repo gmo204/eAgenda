@@ -74,7 +74,7 @@ export class CadastrarTarefasComponent implements OnInit {
   }
 
   get prioridade(){
-    return this.form.get('prioridade')
+    return this.form.get('tipoPrioridade')
   }
 
   get porcentagemConcluido(){

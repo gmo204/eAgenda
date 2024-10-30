@@ -17,8 +17,7 @@ const visualizarCategoriaResolver: ResolveFn<VisualizarCategoriaViewModel> = (
 };
 
 export const listagemCategoriasResolver: ResolveFn<
-  ListarCategoriaViewModel[]
-> = () => {
+  ListarCategoriaViewModel[]> = () => {
   return inject(CategoriaService).selecionarTodos();
 };
 
