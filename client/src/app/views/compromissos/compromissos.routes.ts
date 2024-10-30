@@ -28,7 +28,6 @@ export const compromissosRoutes: Routes = [
       compromissos : listagemCompromissoResolver
     }
   },
-
   {
     path: 'cadastrar',
     component: CadastrarCompromissoComponent,

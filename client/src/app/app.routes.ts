@@ -43,6 +43,8 @@ export const routes: Routes = [
   {path: 'login', component: LoginComponent, canMatch: [authUserGuard]},
 
   {path: 'contatos', children: contatosRoutes},
+  
+  {path: 'compromissos', children: compromissosRoutes},
 
   {path: 'tarefas', children: tarefasRoutes}
 ];

@@ -2,7 +2,14 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, catchError, throwError } from 'rxjs';
-import { ListarTarefaViewModel, VisualizarTarefaViewModel } from '../models/tarefa.models';
+import {
+  EditarTarefaViewModel,
+  InserirTarefaViewModel,
+  ListarTarefaViewModel,
+  TarefaEditadaViewModel,
+  TarefaInseridaViewModel,
+  VisualizarTarefaViewModel
+} from '../models/tarefa.models';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +19,30 @@ export class TarefaService {
 
   constructor( private http: HttpClient) { }
 
-  public inserir() {}
+  public inserir(inserirTarefaVm: InserirTarefaViewModel): Observable<TarefaInseridaViewModel> {
+    return this.http
+    .post<TarefaInseridaViewModel>(this.url, inserirTarefaVm)
+    .pipe(map(this.processarDados), catchError(this.processarFalha));
+  }
 
-  public editar() {}
+  public editar(
+    editarTarefaVm: EditarTarefaViewModel,
+    id: string,
+  ): Observable<TarefaEditadaViewModel> {
+    const urlCompleto = `${this.url}/${id}`;
 
-  public excluir() {}
+    return this.http
+    .put<TarefaEditadaViewModel>(urlCompleto, editarTarefaVm)
+    .pipe(map(this.processarDados), catchError(this.processarFalha));
+  }
+
+  public excluir(id: string): Observable<TarefaEditadaViewModel> {
+    const urlCompleto = `${this.url}/${id}`
+
+    return this.http
+    .delete<VisualizarTarefaViewModel>(urlCompleto)
+    .pipe(map(this.processarDados), catchError(this.processarFalha));
+  }
 
   public selecionarTodos(): Observable<ListarTarefaViewModel[]> {
     return this.http

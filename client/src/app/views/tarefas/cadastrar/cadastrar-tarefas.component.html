@@ -1,0 +1,63 @@
+<main class="container my-5">
+  <div class="row justify-content-center g-3 mt-2">
+    <div class="col col-md-10 col-lg-6">
+      <h1 class="display-3">Cadastro de Tarefa</h1>
+
+      <hr />
+
+      <form [formGroup]="form" (submit)="gravar()">
+        <mat-form-field class="w-100 mt-5" appearance="fill">
+          <mat-label>Titulo</mat-label>
+          <input
+            matInput
+            formControlName="titulo"
+            autocomplete="name"
+            placeholder="Ex: Lavar o cachorro"
+            [maxLength]="30"
+          />
+          <mat-icon matSuffix color="primary">task_alt</mat-icon>
+          <mat-error class="text-white" *ngIf="titulo?.invalid">
+            <span *ngIf="titulo?.errors?.['required']"
+              >O titulo precisa ser preenchido.</span
+            >
+            <span *ngIf="titulo?.errors?.['minlength']"
+              >O titulo deve conter ao menos 3 caracteres.</span
+            >
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 mt-3" appearance="fill">
+          <mat-label>Prioridade</mat-label>
+          <mat-select
+            data-cy="tipoPrioridade"
+            formControlName="tipoPrioridade"
+            placeholder="Selecione a prioridade"
+          >
+            <mat-option *ngFor="let opcao of prioridadeEnum; index as i" [value]="i">
+              {{ opcao }}
+            </mat-option>
+          </mat-select>
+          <mat-error class="text-white" *ngIf="prioridade?.invalid">
+            A prioridade precisa ser selecionado.
+          </mat-error>
+        </mat-form-field>
+
+        <div class="row justify-content-end g-2 gap-2 mt-3">
+          <button type="submit" mat-flat-button class="col-sm-4">
+            <mat-icon matIconPrefix>check</mat-icon>
+            Gravar
+          </button>
+          <a
+            mat-button
+            type="button"
+            class="col-sm-4"
+            routerLink="/contatos/listar"
+          >
+            <mat-icon matIconPrefix>keyboard_return</mat-icon>
+            Voltar
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
