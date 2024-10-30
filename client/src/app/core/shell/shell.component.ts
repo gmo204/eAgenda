@@ -65,6 +65,11 @@ export class ShellComponent {
       rota: '/compromissos',
     },
     {
+      titulo: 'Categorias',
+      icone: 'bookmarks',
+      rota: '/categorias',
+    },
+    {
       titulo: 'Tarefas',
       icone: 'task_alt',
       rota: '/tarefas',

@@ -42,6 +42,58 @@
           </mat-error>
         </mat-form-field>
 
+        <h1 class="display-3 fs-2">Item</h1>
+
+        <hr/>
+
+        <mat-form-field class="w-100 mt-5" appearance="fill">
+          <mat-label>Titulo</mat-label>
+          <input
+            matInput
+            formControlName="tarefa"
+            autocomplete="name"
+            placeholder="Ex: Lavar o cachorro"
+            [maxLength]="30"
+          />
+          <mat-icon matSuffix color="primary">task_alt</mat-icon>
+          <mat-error class="text-white" *ngIf="titulo?.invalid">
+            <span *ngIf="titulo?.errors?.['required']"
+              >O titulo precisa ser preenchido.</span
+            >
+            <span *ngIf="titulo?.errors?.['minlength']"
+              >O titulo deve conter ao menos 3 caracteres.</span
+            >
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 mt-5" appearance="fill">
+          <mat-label>Tarefa</mat-label>
+          <input
+            matInput
+            formControlName="tarefa"
+            autocomplete="name"
+            placeholder="Ex: Lavar o cachorro"
+            [maxLength]="30"
+          />
+          <mat-icon matSuffix color="primary">task_alt</mat-icon>
+          <mat-error class="text-white" *ngIf="titulo?.invalid">
+            <span *ngIf="titulo?.errors?.['required']"
+              >O titulo precisa ser preenchido.</span
+            >
+            <span *ngIf="titulo?.errors?.['minlength']"
+              >O titulo deve conter ao menos 3 caracteres.</span
+            >
+          </mat-error>
+        </mat-form-field>
+
+        <div class="row justify-content-end g-2 gap-2 mt-3">
+            <button type="submit" mat-flat-button class="col-sm-4">
+            <mat-icon matIconPrefix>add_task</mat-icon>
+            Adicionar Item
+          </button>
+        </div>
+
+
         <div class="row justify-content-end g-2 gap-2 mt-3">
           <button type="submit" mat-flat-button class="col-sm-4">
             <mat-icon matIconPrefix>check</mat-icon>
