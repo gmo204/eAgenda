@@ -1,6 +1,6 @@
 import { NgIf, NgForOf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,6 +10,9 @@ import { NotificacaoService } from '../../../core/notificacao/notiicacao.service
 import { TarefaService } from '../service/tarefa.service';
 import { MatSelectModule } from '@angular/material/select';
 import { PrioridadeEnum, TarefaInseridaViewModel } from '../models/tarefa.models';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
+import { MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-cadastrar-tarefas',
@@ -23,7 +26,10 @@ import { PrioridadeEnum, TarefaInseridaViewModel } from '../models/tarefa.models
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDividerModule,
+    MatCardModule,
+    MatTooltipModule
   ],  templateUrl: './cadastrar-tarefas.component.html',
 })
 export class CadastrarTarefasComponent implements OnInit {
@@ -48,17 +54,14 @@ export class CadastrarTarefasComponent implements OnInit {
           Validators.maxLength(30)
         ]
       ],
-      dataCriacao: [],
-      dataConclusao: [],
       prioridade:
       [
-        '',
+        0,
         [
            Validators.required
         ]
       ],
-      porcentagemConcluido: [],
-      itens: []
+      itens: this.fb.array([])
     })
   }
 
@@ -69,11 +72,34 @@ export class CadastrarTarefasComponent implements OnInit {
     return this.form.get('prioridade')
   }
   get itens(){
-    return this.form.get('itens')
+    return this.form.get('itens') as FormArray;
   }
 
   ngOnInit(): void {
     throw new Error('Method not implemented.');
+  }
+
+  public adicionarItem(tituloItem: string) {
+    if(tituloItem.length  < 3) {
+      this.notificacaoService.aviso(
+      'O titulo deve ter no minimoo 3 caracteres.'
+    );
+      return
+    }
+
+    const control = new FormControl({
+      titulo: tituloItem,
+      status: 1,
+      concluido: false,
+    })
+
+    this.itens.push(control)
+  }
+
+  public removerItem(indiceItem: number){
+    this.itens.removeAt(indiceItem);
+
+    this.notificacaoService.aviso('Item removido');
   }
 
   public gravar() {
