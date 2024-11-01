@@ -20,7 +20,8 @@ import { ListarTarefaViewModel } from '../models/tarefa.models';
     MatIconModule,
     MatTooltipModule,
     MatDividerModule,
-  ],  templateUrl: './listar-tarefa.component.html',
+  ],
+  templateUrl: './listar-tarefa.component.html',
 })
 export class ListarTarefaComponent implements OnInit{
   public tarefas: ListarTarefaViewModel[] = [];

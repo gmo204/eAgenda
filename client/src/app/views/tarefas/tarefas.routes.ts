@@ -4,6 +4,8 @@ import { CadastrarTarefasComponent } from "./cadastrar/cadastrar-tarefas.compone
 import { TarefaService } from "./service/tarefa.service";
 import { ListarTarefaViewModel, VisualizarTarefaViewModel } from "./models/tarefa.models";
 import { inject } from "@angular/core";
+import { EditarTarefaComponent } from "./editar/editar-tarefa.component";
+import { ExcluirTarefaComponent } from "./excluir/excluir-tarefa.component";
 
 const listagemTarefaResolver: ResolveFn<ListarTarefaViewModel[]> = () => {
   return inject(TarefaService).selecionarTodos();
@@ -26,14 +28,14 @@ export const tarefasRoutes: Routes = [
     path: 'cadastrar',
     component: CadastrarTarefasComponent,
   },
-  // {
-  //   path: 'editar/:id',
-  //   component: CadastrarTarefasComponent,
-  //   resolve: { tarefa: visualizarTarefaResolver }
-  // },
-  // {
-  //   path: 'excluir/:id',
-  //   component: CadastrarTarefasComponent,
-  //   resolve: { tarefa: visualizarTarefaResolver }
-  // },
+  {
+    path: 'editar/:id',
+    component: EditarTarefaComponent,
+    resolve: { tarefa: visualizarTarefaResolver }
+  },
+  {
+    path: 'excluir/:id',
+    component: ExcluirTarefaComponent,
+    resolve: { tarefa: visualizarTarefaResolver }
+  }
 ]

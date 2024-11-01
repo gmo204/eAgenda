@@ -9,10 +9,10 @@ import { Router, RouterLink } from '@angular/router';
 import { NotificacaoService } from '../../../core/notificacao/notiicacao.service';
 import { TarefaService } from '../service/tarefa.service';
 import { MatSelectModule } from '@angular/material/select';
-import { PrioridadeEnum, TarefaInseridaViewModel } from '../models/tarefa.models';
+import { InserirTarefaViewModel, PrioridadeEnum, TarefaInseridaViewModel } from '../models/tarefa.models';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
-import { MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipModule } from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-cadastrar-tarefas',
@@ -32,7 +32,7 @@ import { MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipModule } from '@angular/material
     MatTooltipModule
   ],  templateUrl: './cadastrar-tarefas.component.html',
 })
-export class CadastrarTarefasComponent implements OnInit {
+export class CadastrarTarefasComponent {
   public form: FormGroup;
 
   public prioridadeEnum = Object.values(PrioridadeEnum).filter((v) => !Number.isFinite(v))
@@ -75,10 +75,6 @@ export class CadastrarTarefasComponent implements OnInit {
     return this.form.get('itens') as FormArray;
   }
 
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-
   public adicionarItem(tituloItem: string) {
     if(tituloItem.length  < 3) {
       this.notificacaoService.aviso(
@@ -110,7 +106,7 @@ export class CadastrarTarefasComponent implements OnInit {
       return;
     }
 
-    const inserirTarefaVm = this.form.value;
+    const inserirTarefaVm: InserirTarefaViewModel = this.form.value;
 
     this.tarefaService.inserir(inserirTarefaVm).subscribe({
       next: (tarefaInserida) => this.processarSucesso(tarefaInserida),

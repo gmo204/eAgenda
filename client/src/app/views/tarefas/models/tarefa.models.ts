@@ -4,10 +4,16 @@ export enum PrioridadeEnum{
   Alta
 }
 
+export enum StatusItemTarefa {
+  Inalterado,
+  Adicionado,
+  Removido,
+}
+
 export interface ItemTarefaViewModel {
-  id: string;
+  id?: string;
   titulo: string;
-  status: number;
+  status: StatusItemTarefa;
   concluido: boolean;
 }
 
@@ -25,7 +31,6 @@ export interface TarefaInseridaViewModel{
 }
 
 export interface EditarTarefaViewModel{
-  id: string;
   titulo: string;
   prioridade: PrioridadeEnum;
   itens: ItemTarefaViewModel[];
@@ -58,6 +63,6 @@ export interface VisualizarTarefaViewModel{
   dataConclusao?: string;
   percentualConcluido: number;
 
-  quantidadedeItens: number;
+  quantidadeItens: number;
   itens: ItemTarefaViewModel[]
 }

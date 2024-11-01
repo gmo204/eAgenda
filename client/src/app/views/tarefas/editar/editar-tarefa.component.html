@@ -1,7 +1,7 @@
 <main class="container my-5">
   <div class="row justify-content-center g-3 mt-2">
     <div class="col col-md-10 col-lg-6">
-      <h1 class="display-3">Cadastro de Tarefa</h1>
+      <h1 class="display-3">Edição de Tarefa</h1>
 
       <hr />
 
@@ -18,7 +18,7 @@
           <mat-icon matSuffix color="primary">description</mat-icon>
           <mat-error class="text-white" *ngIf="titulo?.invalid">
             <span *ngIf="titulo?.errors?.['required']"
-              >O título preciso ser preenchido.</span
+              >O título precisa ser preenchido.</span
             >
             <span *ngIf="titulo?.errors?.['minlength']"
               >O título deve conter ao menos 3 caracteres.</span
@@ -62,7 +62,7 @@
               #tituloItem
               data-cy="tituloItem"
               autocomplete="off"
-              placeholder="Ex: Pegar a esponja"
+              placeholder="Ex: Lavar o carro"
             />
             <mat-icon matSuffix color="primary">notes</mat-icon>
           </mat-form-field>
@@ -82,20 +82,42 @@
           <div class="row g-2 mt-4">
             <mat-card
               appearance="outlined"
-              *ngFor="let item of itens.controls; index as i"
+              *ngFor="let item of itensParaExibicao; index as i"
             >
               <mat-card-content class="d-flex align-items-center">
                 <p class="fs-5 m-0">{{ item.value.titulo }}</p>
 
-                <div class="ms-auto">
+                <div class="d-flex gap-2 ms-auto">
+                  <button
+                  *ngIf="item.value.concluido === false"
+                    mat-mini-fab
+                    extended
+                    (click)="alterarStatusItem(i)"
+                    type="button"
+                    matTooltip="Concluir item"
+                  >
+                    <mat-icon>check_circle</mat-icon>
+                  </button>
+                  <button
+                    *ngIf="item.value.concluido === true"
+                    mat-mini-fab
+                    extended
+                    (click)="alterarStatusItem(i)"
+                    type="button"
+                    matTooltip="Cancelar conclusão do item"
+                  >
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+
                   <button
                     mat-mini-fab
                     data-cy="removerItem"
+                    matTooltip="Remover item"
+                    color="secondary"
                     (click)="removerItem(i)"
                     type="button"
-                    matTooltip="Remover item"
                   >
-                    <mat-icon>cancel</mat-icon>
+                    <mat-icon>delete</mat-icon>
                   </button>
                 </div>
               </mat-card-content>
