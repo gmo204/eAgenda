@@ -65,22 +65,9 @@ export class CadastrarTarefasComponent implements OnInit {
   get titulo(){
     return this.form.get('titulo')
   }
-  get dataCriacao(){
-    return this.form.get('dataCriacao')
-  }
-
-  get dataConclusao(){
-    return this.form.get('dataConclusao')
-  }
-
   get prioridade(){
-    return this.form.get('tipoPrioridade')
+    return this.form.get('prioridade')
   }
-
-  get porcentagemConcluido(){
-    return this.form.get('porcentagemConcluido')
-  }
-
   get itens(){
     return this.form.get('itens')
   }

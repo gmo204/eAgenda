@@ -23,7 +23,9 @@
     </mat-card-header>
 
     <mat-card-content class="d-grid mt-4">
+      <span><strong>Criação:</strong> {{ formatarData(item.dataCriacao) }}</span>
       <span><strong>Prioridade:</strong> {{ item.prioridade }}</span>
+      <span><strong>Status:</strong> {{ item.situacao }}</span>
     </mat-card-content>
 
     <mat-card-footer class="d-flex justify-content-end gap-1 p-3 mt-auto">
